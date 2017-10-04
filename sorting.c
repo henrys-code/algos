@@ -43,11 +43,27 @@ int * insertion_sort(int * list, int length) {
 
 int * selection_sort(int * list, int length) {
     
-    int i, j, temp;
+    int i, j;
     for (i = 0; i < length; i++) {
         for (j = i+1; j < length; j++) {
             if (list[j] < list[i])
                 swap(list, i, j);
+        }
+    }
+    return list;
+}
+
+int * bubble_sort(int * list, int length) {
+    
+    int i, sorted;
+    sorted = 0;
+    while (!sorted) {
+        sorted = 1;
+        for (i = 0; i < length - 1; i++) {
+            if (list[i+1] < list[i]) {
+                swap(list, i, i+1);
+                sorted = 0;
+            }
         }
     }
     return list;
@@ -76,9 +92,14 @@ int main(int argc, char * argv[]) {
         }
     }
     
+    printf("Original list:\n");
     print_list(intlist, length);
+    printf("Insertion sort:\n");
     print_list(insertion_sort(intlist, length), length);
+    printf("Selection sort:\n");
     print_list(selection_sort(intlist, length), length);
+    printf("Bubble sort:\n");
+    print_list(bubble_sort(intlist, length), length);
 
     free(intlist);
     
